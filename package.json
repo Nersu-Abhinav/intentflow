@@ -1,0 +1,21 @@
+{
+  "name": "intentflow",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Intent-bound autonomous purchase agent powered by AI, deterministic financial policies, and Airwallex.",
+  "main": "backend/server.js",
+  "scripts": {
+    "dev": "node --watch backend/server.js",
+    "start": "node backend/server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "axios": "^1.12.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "zod": "^4.1.8"
+  }
+}
