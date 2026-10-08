@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>IntentFlow — Financial Command Center</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="mark">IF</div><div><b>IntentFlow</b><small>Autonomous Finance</small></div></div>
+      <div class="nav"><button class="active">Command Center</button><button>Purchase Intelligence</button><button>Authority</button><button>Transactions</button><button>Audit Ledger</button></div>
+      <div class="connection"><span class="pulse"></span><div><b>Sandbox connected</b><small>Airwallex issuing environment</small></div></div>
+    </aside>
+    <main>
+      <header class="topbar">
+        <div><span class="eyebrow">AGENTIC BANKING · TRACK 2</span><h1>Command Center</h1><p>Turn business intent into bounded payment authority.</p></div>
+        <div class="top-actions"><span class="status"><span class="pulse"></span> Agent online</span><button id="refresh">Refresh state</button></div>
+      </header>
+
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="chip">INTENT-BOUND PURCHASE AGENT</span>
+          <h2>AI understands the intent.<br><em>Policy controls the money.</em></h2>
+          <p>IntentFlow evaluates purchase terms against cash constraints, converts the decision into a financial authority envelope, and lets Airwallex enforce the boundary at transaction time.</p>
+          <div class="flow"><span>Intent</span><i>→</i><span>Policy</span><i>→</i><span>Authority</span><i>→</i><span>Observe</span><i>→</i><span>Re-evaluate</span></div>
+        </div>
+        <div class="radar"><div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div><div class="core">IF</div></div>
+      </section>
+
+      <section class="metrics">
+        <article><span>Available Cash</span><strong id="cash">$25,000</strong><small>Sandbox balance</small></article>
+        <article><span>Reserve Floor</span><strong>$15,000</strong><small>Non-negotiable policy</small></article>
+        <article><span>Authority</span><strong class="green">ACTIVE</strong><small>CloudAnalytics Pro</small></article>
+        <article><span>Decision</span><strong>98.4%</strong><small>Policy-valid confidence</small></article>
+      </section>
+
+      <section class="grid2">
+        <article class="panel">
+          <div class="head"><div><span class="kicker">PURCHASE INTELLIGENCE</span><h3>CloudAnalytics Pro</h3></div><b class="pass">AGENT EVALUATED</b></div>
+          <div class="request"><div class="ai">AI</div><div><b>Business request</b><p>“Get CloudAnalytics Pro, but never let available cash fall below $15,000.”</p></div></div>
+          <div class="options">
+            <div class="option blocked"><div><small>ANNUAL</small><b>$11,808 / year</b><span>18% cheaper · upfront commitment</span></div><strong>BLOCKED</strong></div>
+            <div class="option chosen"><div><small>MONTHLY</small><b>$1,200 / month</b><span>Preserves liquidity · policy safe</span></div><strong>SELECTED</strong></div>
+          </div>
+          <div class="why"><b>WHY</b><p>Annual billing creates a projected cash position below the reserve floor. Monthly billing satisfies the intent while preserving liquidity.</p></div>
+        </article>
+
+        <article class="panel">
+          <div class="head"><div><span class="kicker">FINANCIAL AUTHORITY</span><h3>Bounded payment envelope</h3></div><b class="active">ACTIVE</b></div>
+          <div class="amount">$1,200.00<small>MAXIMUM TRANSACTION · USD</small></div>
+          <div class="controls"><div><span>Currency</span><b>USD only</b></div><div><span>Merchant category</span><b>SaaS / MCC 7372</b></div><div><span>Purpose</span><b>CloudAnalytics subscription</b></div><div><span>Mode</span><b>Autonomous + policy bound</b></div></div>
+          <div class="demo-actions"><button class="primary" id="allow">Simulate $1,000 payment</button><button id="block">Simulate $1,500 attempt</button></div>
+        </article>
+      </section>
+
+      <section class="grid2 lower">
+        <article class="panel">
+          <div class="head"><div><span class="kicker">AGENT ACTIVITY</span><h3>Decision timeline</h3></div></div>
+          <div id="timeline" class="timeline">
+            <div class="event"><i class="ok"></i><div><b>Authority created</b><small>Policy-bound payment envelope ready</small></div><time>NOW</time></div>
+            <div class="event"><i></i><div><b>Monthly option selected</b><small>Reserve threshold protected</small></div><time>03:58</time></div>
+            <div class="event"><i></i><div><b>Annual option rejected</b><small>Projected minimum-reserve breach</small></div><time>03:57</time></div>
+            <div class="event"><i></i><div><b>Purchase intent parsed</b><small>Natural language → structured terms</small></div><time>03:57</time></div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="head"><div><span class="kicker">AUDIT LEDGER</span><h3>Explainable decisions</h3></div></div>
+          <div id="ledger" class="ledger">
+            <div><span>Decision</span><b>MONTHLY_SELECTED</b><em>PASS</em></div>
+            <div><span>Reserve</span><b>$13,800 projected</b><em>PROTECTED</em></div>
+            <div><span>Authority</span><b>$1,200 USD max</b><em>ENFORCED</em></div>
+            <div><span>Principle</span><b>AI proposes · Code decides</b><em>SAFE</em></div>
+          </div>
+          <div class="re-eval"><span class="pulse"></span><div><b>Continuous policy watch</b><small>A new cash inflow can trigger re-evaluation and expand or revoke authority.</small></div></div>
+        </article>
+      </section>
+
+      <footer>IntentFlow · AI interprets. Deterministic policy decides. Airwallex enforces.</footer>
+    </main>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="/app.js"></script>
+</body>
+</html>
