@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 const { scorePurchaseOptions } = require("./financialEngine");
 const { buildAuthorityEnvelope, enforceTransaction } = require("./policyEngine");
 const { validateExtractedIntent } = require("./ai");
@@ -11,7 +12,7 @@ const airwallex = require("./airwallex");
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(express.static("frontend"));
+app.use(express.static(path.join(__dirname, "..", "frontend")));
 
 app.get("/api/health", (_req, res) => {
   res.json({ success: true, service: "IntentFlow", status: "online", mode: "sandbox" });
@@ -48,9 +49,7 @@ app.post("/api/agent/evaluate", (req, res) => {
       allowedMerchantCountries: req.body.policy.allowedMerchantCountries || [],
       preference: req.body.policy.preference || intent.userIntent.preference
     };
-
     const analysis = scorePurchaseOptions({ options: intent.options, policy });
-
     if (!analysis.selected) {
       const decision = store.recordDecision({
         type: "PURCHASE_EVALUATION",
@@ -60,7 +59,6 @@ app.post("/api/agent/evaluate", (req, res) => {
       });
       return res.json({ success: true, decision, analysis });
     }
-
     const authority = buildAuthorityEnvelope({ option: analysis.selected, policy });
     const decision = store.recordDecision({
       type: "PURCHASE_EVALUATION",
@@ -71,7 +69,6 @@ app.post("/api/agent/evaluate", (req, res) => {
         ? "Monthly billing preserves liquidity while satisfying the reserve policy."
         : "Annual billing is safe under the reserve policy and has lower equivalent annual cost."
     });
-
     res.json({ success: true, decision, analysis, authority });
   } catch (error) {
     res.status(400).json({ success: false, error: error.issues || error.message });
@@ -91,7 +88,9 @@ app.post("/api/policy/check-transaction", (req, res) => {
 app.get("/api/audit/decisions", (_req, res) => res.json({ success: true, decisions: store.listDecisions() }));
 app.get("/api/audit/transactions", (_req, res) => res.json({ success: true, transactions: store.listTransactions() }));
 
-app.get("*", (_req, res) => res.sendFile("index.html", { root: "frontend" }));
+app.use((_req, res) => {
+  res.sendFile("index.html", { root: path.join(__dirname, "..", "frontend") });
+});
 
 const PORT = Number(process.env.PORT || 3000);
-app.listen(PORT, () => console.log("IntentFlow API listening on http://localhost:" + PORT));
+app.listen(PORT, () => console.log("IntentFlow API listening on port " + PORT));
