@@ -14,19 +14,24 @@ jobs:
         with:
           node-version: 20
       - run: npm install
-      - run: |
-          node --check backend/server.js
-          node --check backend/airwallex.js
-          node --check backend/financialEngine.js
-          node --check backend/policyEngine.js
-          node --check backend/ai.js
-          node --check backend/store.js
-          node --check frontend/app.js
+      - run: npm run check
       - run: |
           node - <<'NODE'
-          const {enforceTransaction} = require('./backend/policyEngine');
-          const authority={status:'ACTIVE',allowedCurrencies:['USD'],amount:{maxTransactionAmount:1200},merchant:{categoryCodes:['7372'],countries:[]}};
-          if (!enforceTransaction({authority,transaction:{amount:1000,currency:'USD',merchantCategoryCode:'7372',merchantCountry:'US'}}).allowed) process.exit(1);
-          if (enforceTransaction({authority,transaction:{amount:1500,currency:'USD',merchantCategoryCode:'7372',merchantCountry:'US'}}).allowed) process.exit(1);
+          const { enforceTransaction } = require('./backend/policyEngine');
+          const authority = {
+            status: 'ACTIVE',
+            allowedCurrencies: ['USD'],
+            amount: { maxTransactionAmount: 1200 },
+            merchant: { categoryCodes: ['7372'], countries: [] }
+          };
+          const allowed = enforceTransaction({
+            authority,
+            transaction: { amount: 1000, currency: 'USD', merchantCategoryCode: '7372', merchantCountry: 'US' }
+          });
+          const blocked = enforceTransaction({
+            authority,
+            transaction: { amount: 1500, currency: 'USD', merchantCategoryCode: '7372', merchantCountry: 'US' }
+          });
+          if (!allowed.allowed || blocked.allowed) process.exit(1);
           console.log('Policy smoke test passed');
           NODE
